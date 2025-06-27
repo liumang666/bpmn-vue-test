@@ -46,7 +46,7 @@ export default defineConfig(() => {
       visualizer({
         gzipSize: true, // 显示各文件在经过 gzip 压缩后的大小
         brotliSize: true, // 显示各文件在经过 brotli 压缩后的
-        open: true,
+        open: false,
         filename: "visualizer.html", // 生成的报告文件名称
       }),
     ],
@@ -68,11 +68,6 @@ export default defineConfig(() => {
       //   },
       // },
       rollupOptions: {
-        // input: {
-        //   token: path.resolve(__dirname, "token.html"),
-        //   login: path.resolve(__dirname, "login.html"),
-        //   index: path.resolve(__dirname, "index.html"),
-        // },
         output: {
           // experimentalMinChunkSize: 10 * 1024, // 单位b 没有副作用，合并较小的模块 -- 实验性选项
           manualChunks(id) {
@@ -83,10 +78,6 @@ export default defineConfig(() => {
             if (id.includes("/@arco-design/web-vue")) {
               // 让每个插件都打包成独立的文件
               return "arco-design"
-            }
-            if (id.includes("/@codemirror")) {
-              // 让每个插件都打包成独立的文件
-              return "codemirror"
             }
           },
         },
